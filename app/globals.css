@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* ==================================
+   TASKFLOW COLOR SYSTEM
+   ==================================
+   Named theme tokens for a deliberately corporate/enterprise-dashboard
+   palette (slate-navy primary, near-black text, cool neutral grays,
+   confident rather than pastel semantic colors) — lets every
+   component reference bg-canvas / text-charcoal / bg-primary / etc.
+   (plus Tailwind's automatic /opacity modifiers, e.g. bg-success/20)
+   instead of scattering raw hex or Tailwind's stock color scale
+   through the JSX. Presentation only — nothing here is read by any
+   application logic.
+
+   Every token NAME below is unchanged from the previous palette —
+   only the hex values were swapped — so no component file needed any
+   edit for this pass: every className that already reads bg-primary,
+   text-charcoal, bg-success-bg, etc. re-themes automatically.
+
+   Three-tier primary (primary / primary-soft / primary-light) plus
+   four semantic pairs (color + its own pre-mixed light background,
+   deliberately more saturated/legible than a pastel tint this time)
+   — everything else stays neutral (canvas/white/charcoal/muted-gray/
+   line). */
+
+@theme {
+  --color-canvas: #F7F7F8;
+  --color-primary: #33415C;
+  --color-primary-soft: #5C6E91;
+  --color-primary-light: #EEF1F6;
+  --color-charcoal: #1C1D21;
+  --color-muted-gray: #6B6D76;
+  --color-line: #E3E3E7;
+  --color-success: #1E8A5F;
+  --color-success-bg: #E9F6EF;
+  --color-warning: #B7791F;
+  --color-warning-bg: #FBF3E1;
+  --color-danger: #C0362C;
+  --color-danger-bg: #FCEAE8;
+  --color-danger-hover: #9E2B22;
+  --color-info: #2E6DA4;
+  --color-info-bg: #EAF2FA;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}

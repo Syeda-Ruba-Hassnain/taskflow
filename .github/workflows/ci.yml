@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+# Build-time-only placeholders: nothing in this workflow talks to a real
+# database or a real email provider (tests mock those boundaries, and
+# `next build` never executes a route handler), but a handful of modules
+# read these at import time, so a value must be present for `next build`
+# and `tsc` to succeed in an environment with no real secrets configured.
+env:
+  DATABASE_URL: "postgresql://ci:ci@localhost:5432/ci"
+  AUTH_SECRET: "ci-placeholder-secret"
+  BREVO_API_KEY: "ci-placeholder-key"
+  NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build

@@ -1,0 +1,17 @@
+# Normalize all text files to LF line endings in the repository,
+# regardless of the OS or editor used to create/edit them.
+* text=auto eol=lf
+
+# Diff/merge Prisma migrations as text even though they have no
+# extension-based auto-detection edge cases beyond .sql.
+*.sql text eol=lf
+
+# Binary assets — never touched by line-ending normalization.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
